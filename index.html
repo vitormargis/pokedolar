@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    div {
+        width: 100%;
+        text-align: center;
+        padding: 20% 0 ;
+    }
+    p {
+        text-transform: uppercase;
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+    }
+</style>
+<body>
+    
+    <div>
+        <img />
+        <p></p>
+    </div>
+
+</body>
+</html>
+
+<script>
+    fetch('https://api.exchangeratesapi.io/latest?base=USD').then(data => data.json()).then(currencies => {
+        const BRL = Math.round(currencies.rates.BRL * 100) / 100;
+        const BRLtoPokemon = BRL.toString().replace('.', '')
+        fetch(`https://pokeapi.co/api/v2/pokemon/${BRLtoPokemon}`).then(data => data.json()).then(pokemon => {
+            document.querySelector('img').setAttribute('src', pokemon.sprites.front_default)
+            document.querySelector('p').append(`#${BRLtoPokemon} ${pokemon.name}`)
+        })
+    })
+</script>
