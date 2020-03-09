@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:site_name" content="Pokedolar">
     <meta property="og:description" content="Pokedolar" />
-    <meta property="og:image" itemprop="image" content="http://pollosweb.wesped.es/programa_pollos/play.png">
     <meta property="og:type" content="website" />
-    <meta property="og:updated_time" content="1440432930" />
     <title>Pokedolar</title>
 </head>
 <style>
@@ -46,10 +44,14 @@
             document.querySelector('img').setAttribute('src', `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${BRLtoPokemon}.png`)            
             document.querySelector('p').append(`#${BRLtoPokemon} ${pokemon.name}`)
             document.querySelector('title').append(` - #${BRLtoPokemon} ${pokemon.name}`)
-            var link = document.createElement('meta');
-            link.setAttribute('property', 'og:title');
-            link.setAttribute('content', `#${BRLtoPokemon} ${pokemon.name}`);
-            document.getElementsByTagName('head')[0].appendChild(link);
+            const title = document.createElement('meta');
+            title.setAttribute('property', 'og:title');
+            title.setAttribute('content', `#${BRLtoPokemon} ${pokemon.name.toUpperCase()}`);
+            document.getElementsByTagName('head')[0].appendChild(title);
+            const image = document.createElement('meta');
+            image.setAttribute('property', 'og:image');
+            image.setAttribute('content', `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${BRLtoPokemon}.png`);
+            document.getElementsByTagName('head')[0].appendChild(image);
         })
     })
 </script>
