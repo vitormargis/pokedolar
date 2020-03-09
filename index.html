@@ -34,7 +34,7 @@
 </html>
 
 <script>
-    fetch('https://api.exchangeratesapi.io/latest?base=USD').then(data => data.json()).then(currencies => {
+    fetch('http://data.fixer.io/api/latest?access_key=4ca15fa4c688891571b7e929d7f4205c&format=1&base=USD').then(data => data.json()).then(currencies => {
         const BRL = Math.round(currencies.rates.BRL * 100) / 100;
         const BRLtoPokemon = BRL.toString().replace('.', '')
         fetch(`https://pokeapi.co/api/v2/pokemon/${BRLtoPokemon}`).then(data => data.json()).then(pokemon => {
