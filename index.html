@@ -3,12 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:site_name" content="Pokedolar">
-    <meta property="og:title" content="Pokedolar" />
-    <meta property="og:description" content="Pokedolar" />
-    <meta property="og:image" itemprop="image" content="http://pollosweb.wesped.es/programa_pollos/play.png">
-    <meta property="og:type" content="website" />
-    <meta property="og:updated_time" content="1440432930" />    
     <title>Document</title>
 </head>
 <style>
@@ -47,10 +41,6 @@
             // document.querySelector('img').setAttribute('src', pokemon.sprites.front_default)
             document.querySelector('img').setAttribute('src', `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${BRLtoPokemon}.png`)            
             document.querySelector('p').append(`#${BRLtoPokemon} ${pokemon.name}`)
-            var link = document.createElement('meta');
-            link.setAttribute('property', 'og:title');
-            link.content = `#${BRLtoPokemon} ${pokemon.name}`;
-            document.getElementsByTagName('head')[0].appendChild(link);
         })
     })
 </script>
