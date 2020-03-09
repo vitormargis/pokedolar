@@ -49,7 +49,7 @@
             document.querySelector('title').append(` - #${BRLtoPokemon} ${pokemon.name}`)
             var link = document.createElement('meta');
             link.setAttribute('property', 'og:title');
-            link.content = `#${BRLtoPokemon} ${pokemon.name}`;
+            link.setAttribute('content', `#${BRLtoPokemon} ${pokemon.name}`);
             document.getElementsByTagName('head')[0].appendChild(link);
         })
     })
