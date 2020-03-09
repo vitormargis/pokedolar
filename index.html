@@ -41,9 +41,11 @@
             // document.querySelector('img').setAttribute('src', pokemon.sprites.front_default)
             document.querySelector('img').setAttribute('src', `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${BRLtoPokemon}.png`)            
             document.querySelector('p').append(`#${BRLtoPokemon} ${pokemon.name}`)
+            document.querySelector('title').append(` - #${BRLtoPokemon} ${pokemon.name}`)
             var link = document.createElement('meta');
-            link.setAttribute('property', 'og:url');
-            link.content = document.location;
+            link.setAttribute('property', 'og:image');
+            link.content = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${BRLtoPokemon}.png`;
+            link.itemprop = "image"
             document.getElementsByTagName('head')[0].appendChild(link);
         })
     })
