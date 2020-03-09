@@ -6,10 +6,16 @@
     <title>Document</title>
 </head>
 <style>
+    body {
+        background: #eee;
+    }
     div {
         width: 100%;
         text-align: center;
-        padding: 20% 0 ;
+        padding: 10% 0 ;
+    }
+    img {
+        width: 20%;
     }
     p {
         text-transform: uppercase;
@@ -32,7 +38,8 @@
         const BRL = Math.round(currencies.rates.BRL * 100) / 100;
         const BRLtoPokemon = BRL.toString().replace('.', '')
         fetch(`https://pokeapi.co/api/v2/pokemon/${BRLtoPokemon}`).then(data => data.json()).then(pokemon => {
-            document.querySelector('img').setAttribute('src', pokemon.sprites.front_default)
+            // document.querySelector('img').setAttribute('src', pokemon.sprites.front_default)
+            document.querySelector('img').setAttribute('src', `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${BRLtoPokemon}.png`)            
             document.querySelector('p').append(`#${BRLtoPokemon} ${pokemon.name}`)
         })
     })
