@@ -36,21 +36,32 @@
 </body>
 </html>
 
-<script>
-    fetch('https://data.fixer.io/api/latest?access_key=4ca15fa4c688891571b7e929d7f4205c&format=1&base=USD').then(data => data.json()).then(currencies => {
-        const BRL = Math.round(currencies.rates.BRL * 100) / 100;
+<script>    
+    const currency = window.location.href.includes('euro') ? 'EUR' : 'USD';
+    const currencyAPI = `https://data.fixer.io/api/latest?access_key=4ca15fa4c688891571b7e929d7f4205c&format=1&base=${currency}`;
+
+    fetch(currencyAPI).then(data => data.json()).then(currencies => {
+        const rate = currencies.rates.BRL;
+        const BRL = Math.round(rate * 100) / 100;
         const BRLtoPokemon = BRL.toString().replace('.', '')
-        fetch(`https://pokeapi.co/api/v2/pokemon/${BRLtoPokemon}`).then(data => data.json()).then(pokemon => {
-            document.querySelector('img').setAttribute('src', `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${BRLtoPokemon}.png`)            
-            document.querySelector('p').append(`#${BRLtoPokemon} ${pokemon.name}`)
-            document.querySelector('title').append(` - #${BRLtoPokemon} ${pokemon.name}`)
+        
+        fetch(`https://pokeapi.co/api/v2/pokemon/${BRLtoPokemon}`).then(data => data.json()).then(pokemon => {        
+            const pokemonImage = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${
+                BRLtoPokemon.length === 2 ? '0' + BRLtoPokemon : BRLtoPokemon
+            }.png`;
+            
+            document.querySelector('img').setAttribute('src', pokemonImage);
+            document.querySelector('p').append(`#${BRLtoPokemon} ${pokemon.name}`);
+            document.querySelector('title').append(` - #${BRLtoPokemon} ${pokemon.name}`);
+
             const title = document.createElement('meta');
             title.setAttribute('property', 'og:title');
             title.setAttribute('content', `#${BRLtoPokemon} ${pokemon.name.toUpperCase()}`);
             document.getElementsByTagName('head')[0].appendChild(title);
+
             const image = document.createElement('meta');
             image.setAttribute('property', 'og:image');
-            image.setAttribute('content', `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${BRLtoPokemon}.png`);
+            image.setAttribute('content', pokemonImage);
             document.getElementsByTagName('head')[0].appendChild(image);
         })
     })
