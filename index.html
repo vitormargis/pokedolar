@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:site_name" content="Pokedolar">
-    <meta property="og:description" content="Pokedolar" />
+    <meta property="og:site_name" content="Poke Currency">
+    <meta property="og:description" content="Poke Currency" />
     <meta property="og:type" content="website" />
-    <title>Pokedolar</title>
+    <title>Poke Currency</title>
 </head>
 <style>
     body {
@@ -38,6 +38,7 @@
 
 <script>    
     const currency = window.location.href.includes('euro') ? 'EUR' : 'USD';
+    const currencyLabel = window.location.href.includes('euro') ? 'euro' : 'dolar';
     const currencyAPI = `https://data.fixer.io/api/latest?access_key=4ca15fa4c688891571b7e929d7f4205c&format=1&base=${currency}`;
 
     fetch(currencyAPI).then(data => data.json()).then(currencies => {
@@ -52,12 +53,22 @@
             
             document.querySelector('img').setAttribute('src', pokemonImage);
             document.querySelector('p').append(`#${BRLtoPokemon} ${pokemon.name}`);
-            document.querySelector('title').append(` - #${BRLtoPokemon} ${pokemon.name}`);
+            document.querySelector('title').innerHTML = `Poke${currencyLabel} - #${BRLtoPokemon} ${pokemon.name}`;
 
             const title = document.createElement('meta');
             title.setAttribute('property', 'og:title');
-            title.setAttribute('content', `#${BRLtoPokemon} ${pokemon.name.toUpperCase()}`);
+            title.setAttribute('content', `Poke${currencyLabel}`);
             document.getElementsByTagName('head')[0].appendChild(title);
+
+            const siteName = document.createElement('meta');
+            siteName.setAttribute('property', 'og:site_name');
+            siteName.setAttribute('content', `Poke${currencyLabel}`);
+            document.getElementsByTagName('head')[0].appendChild(site_name);
+
+            const description = document.createElement('meta');
+            description.setAttribute('property', 'og:description');
+            description.setAttribute('content', `#${BRLtoPokemon} ${pokemon.name.toUpperCase()}`);
+            document.getElementsByTagName('head')[0].appendChild(description);
 
             const image = document.createElement('meta');
             image.setAttribute('property', 'og:image');
