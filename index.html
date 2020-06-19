@@ -9,26 +9,60 @@
     <title>Poke Currency</title>
 </head>
 <style>
+    body, html {
+        background: rgb(190, 39, 39);
+        position: relative;
+        height: 100%;
+    }
+    
     body {
-        background: #eee;
+        border-left: 40px solid rgb(126, 0, 0);
+        box-shadow: inset 40px 0 0px rgb(146, 0, 0), inset 75px 0 0px rgb(178, 9, 9);
+        margin: 0;
+        padding: 0;
     }
-    div {
-        width: 100%;
+
+
+    .logo {
+        position: absolute;
+        width: 400px;
+        left: 50%;
         text-align: center;
-        padding: 10% 0 ;
+        margin: -338px 0 0 -200px;
+        top: 50%;
+        background-color: #fff;
+        padding: 30px 50px 20px 30px;
+        border-radius: 6px 5px 60px 0px;
+        border-bottom: 12px solid rgb(172, 18, 18);
+        box-sizing: border-box;
+        border-top: 10px solid rgb(172, 18, 18);
     }
-    img {
-        width: 20%;
+
+    .pokedex {
+        position: absolute;
+        width: 400px;
+        text-align: center;
+        margin: -160px 0 0 -200px;
+        top: 50%;
+        padding: 30px 50px 50px;
+        background-color: #fff;
+        border-radius: 0px 50px 5px 50px;
+        border-bottom: 10px solid #eee;
+        box-sizing: border-box;
+        left: 50%;
     }
-    p {
+    .pokedex img {
+        width: 80%;
+    }
+    .pokedex p {
         text-transform: uppercase;
         font-family: Arial, Helvetica, sans-serif;
         margin: 0;
     }
 </style>
 <body>
-    
-    <div>
+    <div class="logo"><img src="./pokedolar-logo.svg" alt=""></div>
+    <div class="pokedex">
         <img />
         <p></p>
     </div>
@@ -45,14 +79,14 @@
         const rate = currencies.rates.BRL;
         const BRL = Math.round(rate * 100) / 100;
         const BRLtoPokemon = BRL.toString().replace('.', '')
-        
-        fetch(`https://pokeapi.co/api/v2/pokemon/${BRLtoPokemon}`).then(data => data.json()).then(pokemon => {        
+
+        fetch(`https://pokeapi.co/api/v2/pokemon/${BRLtoPokemon}`).then(data => data.json()).then(pokemon => {
             const pokemonImage = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${
                 BRLtoPokemon.length === 2 ? '0' + BRLtoPokemon : BRLtoPokemon
             }.png`;
-            
-            document.querySelector('img').setAttribute('src', pokemonImage);
-            document.querySelector('p').append(`#${BRLtoPokemon} ${pokemon.name}`);
+
+            document.querySelector('.pokedex img').setAttribute('src', pokemonImage);
+            document.querySelector('.pokedex p').append(`#${BRLtoPokemon} ${pokemon.name}`);
             document.querySelector('title').innerHTML = `Poke${currencyLabel} - #${BRLtoPokemon} ${pokemon.name}`;
 
             const title = document.createElement('meta');
